@@ -6,6 +6,16 @@ const resposta = document.getElementById("resposta");
 const mensagemEspecial = document.getElementById("mensagemEspecial");
 const musicaFundo = document.getElementById("musicaFundo");
 
+window.addEventListener("DOMContentLoaded", () => {
+  const musicaFundo = document.getElementById("musicaFundo");
+
+  musicaFundo.play().catch(() => {
+    document.addEventListener("click", () => {
+      musicaFundo.play().catch(() => {});
+    }, { once: true });
+  });
+});
+
 const volumeNormal = 0.2;
 const volumeBaixo = 0.05;
 musicaFundo.volume = volumeNormal;
@@ -94,3 +104,4 @@ btnNao.addEventListener("click", (event) => {
   somNao.play();
   somNao.addEventListener("ended", () => musicaFundo.volume = volumeNormal);
 });
+
