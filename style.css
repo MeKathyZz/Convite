@@ -218,13 +218,14 @@ button {
   100% { transform: translate(var(--x),var(--y)) scale(0); opacity:0; }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
   h1 {
-    font-size: 1.6rem;
-    white-space: nowrap;
-    overflow: auto;
-    text-overflow: ellipsis;
+    font-size: 1.5rem;
+    white-space: normal;
+    overflow: visible;
   }
+}
+
 
   .mensagem-especial {
     font-size: 1em;
@@ -244,6 +245,7 @@ button {
     max-width: 95%;
   }
 }
+
 
 
 
