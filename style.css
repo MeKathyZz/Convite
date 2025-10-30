@@ -38,7 +38,7 @@ h1 {
   font-size: 2rem;
   line-height: 1.2;
   white-space: nowrap;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -108,7 +108,7 @@ button {
 #detalhes.ativo {
   opacity: 1;
   transform: translateY(0);
-  max-height: 800px;
+  max-height: 1000px;
   transition: opacity 1s ease, transform 1s ease, max-height 1s ease;
 }
 
@@ -245,6 +245,7 @@ button {
     max-width: 95%;
   }
 }
+
 
 
 
