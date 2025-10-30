@@ -220,7 +220,7 @@ button {
 
 @media screen and (max-width: 768px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     white-space: nowrap;
     overflow: auto;
     text-overflow: ellipsis;
@@ -244,5 +244,6 @@ button {
     max-width: 95%;
   }
 }
+
 
 
