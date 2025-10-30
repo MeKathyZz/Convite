@@ -222,7 +222,7 @@ button {
   h1 {
     font-size: 1.8rem;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: auto;
     text-overflow: ellipsis;
   }
 
@@ -244,4 +244,5 @@ button {
     max-width: 95%;
   }
 }
+
 
