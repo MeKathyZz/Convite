@@ -72,12 +72,12 @@
   <table id="tabelaRespostas">
     <thead>
       <tr>
-        <th>Apagar</th>
         <th>Nome</th>
         <th>Resposta</th>
         <th>Data</th>
+        <th>Apagar</th>
       </tr>
-    </thead>
+</thead>
   </table>
 </div>
 
@@ -110,7 +110,7 @@
           <td>${resposta}</td>
           <td>${data ? new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—"}</td>
           <td>
-            ${id ? `<button onclick="apagarResposta('${id}', this)">🗑️</button>` : "—"}
+            ${id !== "—" ? `<button onclick="apagarResposta('${id}', this)">🗑️</button>` : "—"}
           </td>
         `;
         tbody.appendChild(linha);
