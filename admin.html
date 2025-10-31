@@ -78,7 +78,6 @@
         <th>Data</th>
       </tr>
     </thead>
-    <tbody></tbody>
   </table>
 </div>
 
@@ -102,21 +101,21 @@
       dados.forEach(item => {
         const nome = item.Nome || item.nome || "—";
         const resposta = item.Resposta || item.resposta || "—";
-        const data = item.Data || item.data || "—";
+        const data = item.Data || item.data;
         const id = item.ID || item.id || "—";
         
         const linha = document.createElement("tr");
         linha.innerHTML = `
           <td>${nome}</td>
           <td>${resposta}</td>
-          <td>${new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</td>
+          <td>${data ? new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—"}</td>
           <td>
             ${id ? `<button onclick="apagarResposta('${id}', this)">🗑️</button>` : "—"}
           </td>
         `;
         tbody.appendChild(linha);
 
-        if (resposta.toLowerCase() === "sim") totalSim++;
+        if (resposta?.toLowerCase() === "sim") totalSim++;
       });
 
       document.getElementById("contagem").textContent = `Total de confirmados: ${totalSim}`;
