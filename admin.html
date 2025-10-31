@@ -86,7 +86,7 @@
   <script>
     let dadosOriginais = [];
 
-    fetch("https://convite-backend-61sh.onrender.com/api/respostas")
+    fetch("https://convite-backend-46vc.onrender.com/api/respostas")
       .then(res => res.json())
       .then(dados => {
         dadosOriginais = dados;
@@ -100,16 +100,15 @@
       let totalSim = 0;
 
       dados.forEach(item => {
-        const nome = item.Nome || "—";
-        const resposta = item.Resposta || "—";
-        const data = item.Data || new Date().toISOString();
-        const id = item.ID || item.id || null;
+        const nome = item.Nome || item.nome || "—";
+        const resposta = item.Resposta || item.resposta || "—";
+        const data = item.Data || item.data || new Date().toISOString();
 
         const linha = document.createElement("tr");
         linha.innerHTML = `
           <td>${nome}</td>
           <td>${resposta}</td>
-          <td>${new Date(data).toLocaleString()}</td>
+          <td>${new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</td>
           <td>
             ${id ? `<button onclick="apagarResposta('${id}', this)">🗑️</button>` : "—"}
           </td>
@@ -125,9 +124,7 @@
     function apagarResposta(id, botao) {
       if (confirm("Apagar esta resposta?")) {
         botao.classList.add("loading");
-        fetch(`https://convite-backend-61sh.onrender.com/api/resposta/${id}`, {
-          method: "DELETE"
-        })
+        fetch(`https://convite-backend-46vc.onrender.com/api/resposta/${id}`, { method: "DELETE" })
         .then(res => res.json())
         .then(data => {
           alert(data.mensagem || "Resposta apagada.");
@@ -154,7 +151,7 @@
 
     document.getElementById("btnLimpar").addEventListener("click", () => {
       if (confirm("Tem certeza que deseja apagar TODAS as respostas?")) {
-        fetch("https://convite-backend-61sh.onrender.com/api/resposta", {
+        fetch("https://convite-backend-46vc.onrender.com/api/resposta", {
           method: "DELETE"
         })
         .then(res => res.json())
