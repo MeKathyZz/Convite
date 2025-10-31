@@ -5,9 +5,52 @@ const btnNao = document.getElementById("btnNao");
 const resposta = document.getElementById("resposta");
 const mensagemEspecial = document.getElementById("mensagemEspecial");
 const musicaFundo = document.getElementById("musicaFundo");
+const nomeConvidado = document.getElementById("nomeConvidado");
+
+btnSim.disabled = true;
+btnNao.disabled = true;
+
+nomeConvidado.addEventListener("input", () => {
+  const nomePreenchido = nomeConvidado.value.trim().length > 0;
+  btnSim.disabled = !nomePreenchido;
+  btnNao.disabled = !nomePreenchido;
+});
+
+function enviarResposta(respostaEscolhida) {
+  const nome = nomeConvidado.value.trim() || "Anônimo";
+  const data = new Date().toISOString();
+
+  fetch("https://convite-backend-61sh.onrender.com/api/resposta", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, resposta: respostaEscolhida, data }),
+  });
+}
 
 window.addEventListener("DOMContentLoaded", () => {
-  const musicaFundo = document.getElementById("musicaFundo");
+  const conviteAberto = localStorage.getItem("conviteAberto") === "true";
+
+  if (conviteAberto) {
+    detalhes.classList.add("ativo");
+    btnAbrir.textContent = "Fechar Convite ✖️";
+    mensagemEspecial.style.display = "none";
+  } else {
+    mensagemEspecial.style.display = "block";
+    detalhes.classList.remove("ativo");
+    btnAbrir.textContent = "Abrir Convite 🎁";
+  }
+
+  const respostaSalva = localStorage.getItem("respostaConvite");
+
+  if (respostaSalva === "sim") {
+    resposta.textContent = "🎉 Que ótimo! Vai ser incrível comemorar com você!";
+    resposta.style.color = "#4CAF50";
+    resposta.style.textAlign = "center";
+  } else if (respostaSalva === "nao") {
+    resposta.textContent = "😒 Melhore.";
+    resposta.style.color = "#d32f2f";
+    resposta.style.textAlign = "center";
+  }
 
   musicaFundo.play().catch(() => {
     document.addEventListener("click", () => {
@@ -27,7 +70,7 @@ const somNao = new Audio("Sons/nao.mp3");
 let musicaIniciada = false;
 
 function criarFaiscas(event) {
-  const cores = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#8f00ff"];
+  const cores = ["#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff", "#4b0082", "#8f00ff"];
   const numParticulas = 20;
 
   for (let i = 0; i < numParticulas; i++) {
@@ -47,7 +90,28 @@ function criarFaiscas(event) {
   }
 }
 
+function explodirConfete() {
+  const cores = ["#ff69b4", "#ffd700", "#00bfff", "#32cd32", "#ff4500", "#8a2be2"];
+  for (let i = 0; i < 120; i++) {
+    const confete = document.createElement("div");
+    confete.classList.add("confete");
+    confete.style.left = Math.random() * window.innerWidth + "px";
+    confete.style.top = Math.random() * window.innerHeight + "px";
+    confete.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+    document.body.appendChild(confete);
+    setTimeout(() => confete.remove(), 3000);
+  }
+}
+
 btnAbrir.addEventListener("click", (event) => {
+  const conviteAberto = detalhes.classList.contains("ativo");
+
+  if (!conviteAberto) {
+    localStorage.setItem("conviteAberto", "true");
+  } else {
+    localStorage.removeItem("conviteAberto");
+  }
+
   if (!musicaIniciada) {
     musicaFundo.play().catch(() => {});
     musicaIniciada = true;
@@ -75,11 +139,14 @@ btnAbrir.addEventListener("click", (event) => {
 });
 
 btnSim.addEventListener("click", (event) => {
+  localStorage.setItem("respostaConvite", "sim");
+  enviarResposta("sim");
   resposta.textContent = "🎉 Que ótimo! Vai ser incrível comemorar com você!";
   resposta.style.color = "#4CAF50";
   resposta.style.textAlign = "center";
 
   criarFaiscas(event);
+  explodirConfete();
 
   if (!somNao.paused) {
     somNao.pause();
@@ -93,6 +160,8 @@ btnSim.addEventListener("click", (event) => {
 });
 
 btnNao.addEventListener("click", (event) => {
+  localStorage.setItem("respostaConvite", "nao");
+  enviarResposta("nao");
   resposta.textContent = "😒 Melhore.";
   resposta.style.color = "#d32f2f";
   resposta.style.textAlign = "center";
@@ -104,4 +173,3 @@ btnNao.addEventListener("click", (event) => {
   somNao.play();
   somNao.addEventListener("ended", () => musicaFundo.volume = volumeNormal);
 });
-
