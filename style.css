@@ -256,10 +256,15 @@ button:disabled {
     overflow: visible;
   }
 
-  .card {
-    padding: 20px;
-    max-width: 95%;
-  }
+.card {
+  animation: aparecer 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
 
   .mensagem-especial {
     font-size: 1em;
@@ -273,4 +278,17 @@ button:disabled {
     font-size: 0.95em;
     padding: 9px 20px;
   }
+}
+
+.coração {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 2rem;
+  animation: pulsarCoracao 1.5s infinite;
+}
+
+@keyframes pulsarCoracao {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
 }
