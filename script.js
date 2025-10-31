@@ -40,18 +40,6 @@ window.addEventListener("DOMContentLoaded", () => {
     btnAbrir.textContent = "Abrir Convite 🎁";
   }
 
-  const respostaSalva = localStorage.getItem("respostaConvite");
-
-  if (respostaSalva === "sim") {
-    resposta.textContent = "🎉 Que ótimo! Vai ser incrível comemorar com você!";
-    resposta.style.color = "#4CAF50";
-    resposta.style.textAlign = "center";
-  } else if (respostaSalva === "nao") {
-    resposta.textContent = "😒 Melhore.";
-    resposta.style.color = "#d32f2f";
-    resposta.style.textAlign = "center";
-  }
-
   musicaFundo.play().catch(() => {
     document.addEventListener("click", () => {
       musicaFundo.play().catch(() => {});
