@@ -107,9 +107,10 @@
 
         const linha = document.createElement("tr");
         linha.innerHTML = `
+          <td>${new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</td>
           <td>${nome}</td>
           <td>${resposta}</td>
-          <td>${new Date(data).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</td>
+                 
           <td>
             ${id ? `<button onclick="apagarResposta('${id}', this)">🗑️</button>` : "—"}
           </td>
