@@ -63,24 +63,27 @@
   <h1>Painel de Confirmação de Presença</h1>
 
   <div class="center">
-    <input type="text" id="filtroNome" placeholder="🔍 Filtrar por nome..." oninput="filtrarTabela()">
-    <br>
-    <button onclick="exportarCSV()">📄 Exportar Respostas em CSV</button>
-    <button id="btnLimpar">🗑️ Limpar todas as respostas</button>
-    <div id="contagem"></div>
-  </div>
+  <input type="text" id="filtroNome" placeholder="🔍 Filtrar por nome..." oninput="filtrarTabela()">
+  <br>
+  <button onclick="exportarCSV()">📄 Exportar Respostas em CSV</button>
+  <button id="btnLimpar">🗑️ Limpar todas as respostas</button>
+  <div id="contagem"></div>
 
+  <!-- 👇 Tabela movida para cá -->
   <table id="tabelaRespostas">
     <thead>
       <tr>
+        <th>Apagar</th>
         <th>Nome</th>
         <th>Resposta</th>
         <th>Data</th>
-        <th>Apagar</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
+</div>
+
+
 
   <script>
     let dadosOriginais = [];
