@@ -28,7 +28,7 @@ function enviarResposta(respostaEscolhida) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const conviteAberto = localStorage.getItem("conviteAberto") === "true";
+  const conviteAberto = false;
 
   if (conviteAberto) {
     detalhes.classList.add("ativo");
@@ -105,12 +105,6 @@ function explodirConfete() {
 
 btnAbrir.addEventListener("click", (event) => {
   const conviteAberto = detalhes.classList.contains("ativo");
-
-  if (!conviteAberto) {
-    localStorage.setItem("conviteAberto", "true");
-  } else {
-    localStorage.removeItem("conviteAberto");
-  }
 
   if (!musicaIniciada) {
     musicaFundo.play().catch(() => {});
