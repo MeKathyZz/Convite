@@ -43,17 +43,6 @@
     #btnLimpar:hover {
       background-color: #b71c1c;
     }
-    .apagar-btn {
-      background-color: #c62828;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .apagar-btn:hover {
-      background-color: #b71c1c;
-    }
     #contagem {
       font-weight: bold;
       margin-top: 20px;
@@ -90,17 +79,16 @@
         let totalSim = 0;
 
         dados.forEach(item => {
-          const id = item._id;
-          const nome = item.nome || "—";
-          const resposta = item.resposta || "—";
-          const data = item.data || item.createdAt || new Date().toISOString();
+          const nome = item.Nome || "—";
+          const resposta = item.Resposta || "—";
+          const data = item.Data || new Date().toISOString();
 
           const linha = document.createElement("tr");
           linha.innerHTML = `
             <td>${nome}</td>
             <td>${resposta}</td>
             <td>${new Date(data).toLocaleString()}</td>
-            <td><button class="apagar-btn" onclick="apagarResposta('${id}')">🗑️</button></td>
+            <td>—</td> <!-- Sem _id, não dá pra apagar individualmente -->
           `;
           tbody.appendChild(linha);
 
@@ -140,21 +128,6 @@
         .catch(() => alert("Erro ao apagar respostas."));
       }
     });
-
-    // Apaga uma resposta específica
-    function apagarResposta(id) {
-      if (confirm("Apagar esta resposta?")) {
-        fetch(`https://convite-backend-61sh.onrender.com/api/resposta/${id}`, {
-          method: "DELETE"
-        })
-        .then(res => res.json())
-        .then(data => {
-          alert(data.mensagem || "Resposta apagada.");
-          location.reload();
-        })
-        .catch(() => alert("Erro ao apagar resposta."));
-      }
-    }
   </script>
 </body>
 </html>
