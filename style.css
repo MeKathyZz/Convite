@@ -280,6 +280,52 @@ button:disabled {
   }
 }
 
+#contagem {
+  font-size: 1.2rem;
+  color: #6a1b9a;
+  margin: 15px 0;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+  font-weight: bold;
+}
+
+table button {
+  background-color: #d34ab5;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#filtroNome {
+  padding: 10px;
+  border: 2px solid #a84fd1;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+  box-shadow: 0 0 5px rgba(168, 79, 209, 0.3);
+}
+
+
 .coração {
   position: fixed;
   bottom: 20px;
